@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/UPMUI.iml" filepath="$PROJECT_DIR$/.idea/UPMUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/OpenUPM-UI.iml" filepath="$PROJECT_DIR$/.idea/OpenUPM-UI.iml" />
     </modules>
   </component>
 </project>
