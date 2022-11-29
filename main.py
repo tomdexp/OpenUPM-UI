@@ -101,9 +101,6 @@ button_check_url.pack(pady=12, padx=50)
 button_visit_url = customtkinter.CTkButton(master=frame_1, text="OpenUPM Website", command=visit_openupm_website)
 button_visit_url.pack(pady=12, padx=50)
 
-#button_debug_print = customtkinter.CTkButton(master=frame_1, text="Debug Print", command=button_callback)
-#button_debug_print.pack(pady=12, padx=50)
-
 button_2 = customtkinter.CTkButton(master=frame_1, command=select_folder, text="Select Project Folder")
 button_2.pack(pady=12, padx=50)
 
