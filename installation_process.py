@@ -12,8 +12,8 @@ class InstallationProcess:
         self.CallBackEvents = Events()
 
     def apply_defaults(self):
-        self.package_name = "com.cysharp.memorypack"
-        self.folder_path = "C:/Users/Lexim R1/Documents/AssetInventory"
+        self.package_name = "com.default"
+        self.folder_path = "folder/default"
         self.installation_complete = False
         self.print_log("Applied defaults to InstallationProcess object.")
 

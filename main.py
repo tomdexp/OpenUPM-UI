@@ -10,15 +10,9 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "gre
 
 app = customtkinter.CTk()
 app.geometry("780x640")
-app.title("Open Source Unity Package Registry Installer")
+app.title("Easy Installer for Open Source Unity Package Registry ")
 
 current_installation_process = installation_process.InstallationProcess("", "", False)
-
-
-def button_callback():
-    #current_installation_process.apply_defaults()
-    #print(current_installation_process)
-    current_installation_process.log_test()
 
 
 def select_folder():
@@ -38,10 +32,12 @@ def install_into_folder():
 
 def installation_complete():
     print("Installation complete! event callback called.")
+    add_log("Installation completed!")
 
 
 def installation_failed():
     print("Installation failed! event callback called.")
+    add_log("Installation failed! Read above for more information.")
 
 
 def add_log(value):
