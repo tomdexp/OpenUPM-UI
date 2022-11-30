@@ -57,9 +57,9 @@ def parse_package_url():
     except IndexError:
         add_log("Invalid URL! Please enter a valid package URL.")
         return
-    add_log("Package name is : " + package_name)
+    add_log(f"Package name is : {package_name}")
     current_installation_process.package_name = package_name
-    label_selected_package.configure(text="Selected package: " + package_name)
+    label_selected_package.configure(text=f"Selected package: {package_name}")
     verify_if_can_install()
 
 

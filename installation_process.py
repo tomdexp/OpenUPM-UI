@@ -17,36 +17,45 @@ class InstallationProcess:
         self.print_log("Applied defaults to InstallationProcess object.")
 
     def install(self):
-        self.print_log("Installing " + self.package_name + " into " + self.folder_path)
+        self.print_log(f"Installing {self.package_name} into {self.folder_path}")
         self.print_log("Checking if Node.js is installed...")
         obj = subprocess.run("node -v", shell=True, capture_output=True)
-        node_version = obj.stdout.decode("utf-8")
-        node_version_number = node_version.split("v")[1]
-        node_version_major = str(node_version_number.split(".")[0])
-        node_version_minor = str(node_version_number.split(".")[1])
-        node_version_total = int(node_version_major + node_version_minor)
+        try:
+            node_version = obj.stdout.decode("utf-8")
+            node_version_number = node_version.split("v")[1]
+            node_version_major = str(node_version_number.split(".")[0])
+            node_version_minor = str(node_version_number.split(".")[1])
+            node_version_total = int(node_version_major + node_version_minor)
+        except IndexError:
+            self.print_log("Node.js is not installed! Please install Node.js and try again.")
+            self.CallBackEvents.on_installation_failed()
+            return
         if obj.returncode != 0:
             self.print_log("Node.js is not installed! Please install Node.js and try again.")
+            self.CallBackEvents.on_installation_failed()
             return
         if node_version_total < 1418:
-            self.print_log("Node.js version is too old! Please update Node.js to at least v14.18 or above and try again.")
+            self.print_log(f"Node.js version is too old ({node_version})! Please update Node.js to at least v14.18 or above and try again.")
+            self.CallBackEvents.on_installation_failed()
             return
-        self.print_log("Node.js version: " + node_version_number)
+        self.print_log(f"Node.js version: {node_version_number}")
         self.print_log("Checking if npm is installed...")
         obj = subprocess.run("npm -v", shell=True, capture_output=True)
+        npm_version = obj.stdout.decode("utf-8")
         if obj.returncode != 0:
             self.print_log("npm is not installed! Please install npm and try again.")
             return
-        self.print_log("npm version: " + obj.stdout.decode("utf-8"))
+        self.print_log(f"npm version: {npm_version}")
         self.print_log("Checking if OpenUPM CLI is installed...")
         obj = subprocess.run("openupm -V", shell=True, capture_output=True)
+        openupm_version = obj.stdout.decode("utf-8")
         if obj.returncode != 0:
             self.print_log("OpenUPM CLI is not installed! Automatically installing OpenUPM CLI, please wait...")
             subprocess.run("npm install -g openupm-cli", shell=True, capture_output=True)
             self.print_log("OpenUPM CLI installed!")
         else:
-            self.print_log("OpenUPM CLI version: " + obj.stdout.decode("utf-8"))
-        self.print_log("Installing package...")
+            self.print_log(f"OpenUPM CLI version: {openupm_version}")
+        self.print_log("Installing OpenUPM package...")
         obj = subprocess.run(
             'openupm --chdir "{path}" add {pkg}'.format(path=self.folder_path, pkg=self.package_name),
             shell=True, capture_output=True)
