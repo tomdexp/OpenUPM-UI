@@ -2,7 +2,6 @@ import subprocess
 from events import Events
 
 
-# create a class
 class InstallationProcess:
     def __init__(self, package_name, folder_path, installation_complete):
         self.package_name = package_name
@@ -18,7 +17,7 @@ class InstallationProcess:
         self.print_log("Applied defaults to InstallationProcess object.")
 
     def install(self):
-        self.print_log("Installing " + self.package_name + " into " + self.folder_path + " ...")
+        self.print_log("Installing " + self.package_name + " into " + self.folder_path)
         self.print_log("Checking if Node.js is installed...")
         obj = subprocess.run("node -v", shell=True, capture_output=True)
         node_version = obj.stdout.decode("utf-8")
@@ -51,15 +50,9 @@ class InstallationProcess:
         obj = subprocess.run(
             'openupm --chdir "{path}" add {pkg}'.format(path=self.folder_path, pkg=self.package_name),
             shell=True, capture_output=True)
-        if obj.stderr.decode("utf-8") != "":
-            self.print_log(obj.stderr.decode("utf-8"))
-            self.installation_log = obj.stderr.decode("utf-8")
-            self.CallBackEvents.on_installation_failed()
-            return
         self.print_log("Package installed!")
         self.print_log(obj.stdout.decode("utf-8"))
         self.print_log(obj.stderr.decode("utf-8"))
-        self.print_log("Installation complete!")
         self.installation_complete = True
         self.CallBackEvents.on_installation_complete()
 
@@ -67,11 +60,6 @@ class InstallationProcess:
         print(value)
         self.installation_log += "[LOG] " + value + "\n"
         self.CallBackEvents.on_log(value)
-
-    def log_test(self):
-        self.print_log("Test log 1")
-        self.print_log("Test log 2")
-        self.print_log("Test log 3")
 
     def __str__(self):
         return "InstallationProcess(package_name=" + self.package_name + ", folder_path=" + self.folder_path + ", installation_complete=" + str(
