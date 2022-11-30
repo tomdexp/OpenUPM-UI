@@ -1,6 +1,8 @@
 # OpenUPM-UI
+
 ## Easy installation of your Open UPM packages using a GUI
-### Showcase
+![The UI in dark mode](https://github.com/tomdexp/OpenUPM-UI/blob/main/documentation/openupm_easy_installer_screenshot_dark_mode.png?raw=true)
+![The UI in light mode](https://github.com/tomdexp/OpenUPM-UI/blob/main/documentation/openupm_easy_installer_screenshot_light_mode.png?raw=true)
 
 ### How to install ?
 - Download the latest realease here : https://github.com/tomdexp/OpenUPM-UI/releases/tag/build
