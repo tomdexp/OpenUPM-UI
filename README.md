@@ -5,7 +5,7 @@
 ![The UI in light mode](https://github.com/tomdexp/OpenUPM-UI/blob/main/documentation/openupm_easy_installer_screenshot_light_mode.png?raw=true)
 
 ### How to install ?
-- Download the latest realease here : https://github.com/tomdexp/OpenUPM-UI/releases/tag/build
+- Download the latest realease here : https://github.com/tomdexp/OpenUPM-UI/releases/latest
 - Extract folder
 - Execute "Easy OpenUPM Installer.exe"
 
