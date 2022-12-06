@@ -17,9 +17,13 @@ current_installation_process = installation_process.InstallationProcess("", "", 
 
 def select_folder():
     selected_folder_path = filedialog.askdirectory(title='Select the Parent Directory')
-    label_selected_folder.configure(text="Selected folder: " + selected_folder_path)
-    current_installation_process.folder_path = selected_folder_path
-    verify_if_can_install()
+    if is_unity_project(selected_folder_path):
+        current_installation_process.folder_path = selected_folder_path
+        label_selected_folder.configure(text=f"Selected folder: {selected_folder_path}")
+        add_log(f"Selected folder is a valid Unity Project : {selected_folder_path}")
+        verify_if_can_install()
+    else:
+        add_log("Selected folder is not a Unity project! Please select a Unity project folder.")
 
 
 def install_into_folder():
@@ -73,6 +77,23 @@ def verify_if_can_install():
         return
     else:
         button_install.configure(state="normal")
+
+
+def is_unity_project(folder):
+    # Check if the folder exists
+    if not os.path.isdir(folder):
+        return False
+
+    # Check if the folder contains a "ProjectSettings" folder
+    if not os.path.isdir(os.path.join(folder, "ProjectSettings")):
+        return False
+
+    # Check if the folder contains a "Assets" folder
+    if not os.path.isdir(os.path.join(folder, "Assets")):
+        return False
+
+    # If all checks pass, return True
+    return True
 
 
 frame_1 = customtkinter.CTkFrame(master=app)
